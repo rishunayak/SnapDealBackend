@@ -1,0 +1,69 @@
+const express=require("express")
+const bcrypt = require('bcrypt');
+const app=express.Router()
+const jwt = require('jsonwebtoken');
+const authentication = require("../middleware/authentication");
+const Cart = require("../Models/cart.model");
+const User = require("../Models/user.model");
+const Order = require("../Models/order.model");
+
+app.use(authentication)
+
+app.get("/",async(req,res)=>
+{
+    try
+    {
+        const getData=await Order.find({id:req.body.id}).populate("product")
+        res.send(getData)
+    }
+    catch(e)
+    {
+        res.send(e)
+    }
+   
+})
+
+app.post("/done",async(req,res)=>
+{
+    const {id,product}=req.body
+
+    try
+    {
+        const exist=await Order.findOne({id:id})
+        if(exist)
+        {
+            exist.product=[...exist.product,product];
+            try
+            {
+                await Order.findByIdAndUpdate({_id:exist._id},exist)
+                res.send({msg:"Order Placed Successfully"});
+            }
+            catch(e)
+            {
+                res.send(e)
+            }
+            
+        }
+        else
+        {
+            try
+            {
+                await Cart.create({id,product})
+                res.send({msg:"Order Placed Successfully"});
+            }
+            catch(e)
+            {
+                res.send(e)
+            }
+            
+        }
+    }
+    catch(e)
+    {
+        res.send(e)
+    }
+    
+   
+})
+
+module.exports=app
