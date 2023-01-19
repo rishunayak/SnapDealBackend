@@ -12,7 +12,7 @@ app.get("/",async(req,res)=>
 {
     try
     {
-        const getData=await Cart.find({id:req.body.id}).populate("products.product")
+        const getData=await Cart.findOne({id:req.body.id}).populate("products.product")
         res.send(getData)
     }
     catch(e)
