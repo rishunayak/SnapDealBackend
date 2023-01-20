@@ -94,4 +94,44 @@ app.post("/addToCart",async(req,res)=>
    
 })
 
+
+app.delete("/delete",async(req,res)=>
+{
+    
+    const {id,productId}=req.body
+    try
+    {
+        await Cart.updateOne({id,id},{$pull:{products:{_id:productId}}})
+        res.send({msg:"Delete Successully"})
+        
+    }
+    catch(error)
+    {
+        res.send(error)
+    }
+    
+
+})
+
+
+app.patch("/update",async(req,res)=>
+{
+    
+    const {id,quntity,productId}=req.body
+    try
+    {
+        await Cart.updateOne({id:id,"products._id":productId},{$set:{"products.$.quntity":quntity}}) 
+        res.send({msg:"Updated Successully"})
+        
+    }
+    catch(error)
+    {
+        res.send(error)
+    }
+    
+
+})
+
+
+
 module.exports=app

@@ -246,19 +246,16 @@ app.patch("/edit/:id",async(req,res)=>
 app.get("/",async(req,res)=>
 {
 
-   const {page,search}=req.query
-  
+   const {page=1,search}=req.query
+  // console.log(req.query)
    if(search)
    {
-   // console.log(req.query)
     const data=await Product.find({name:{$regex:search}}).limit(10).skip(10*(page-1))
-    // const totalSize=await Product.find({name:{$regex:search}}).totalSize()
     res.send(data)
    }
    else
    {
-    const data=await Product.find().limit(10).skip(10*(page-1))
-  
+    const data=await Product.find().limit(10).skip(10*(page-1)) 
     res.send(data)
    }
 
