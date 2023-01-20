@@ -8,6 +8,20 @@ const admin = require("../middleware/admin");
 
 
 
+app.get("/:id",async(req,res)=>
+{
+    const id=req.params.id
+
+    try
+    {
+        const getData=await Product.findOne({_id:id})
+        res.send(getData)
+    }
+    catch(e)
+    {
+        res.send(e)
+    }
+})
 
 app.get("/shoes",async(req,res)=>
 {
