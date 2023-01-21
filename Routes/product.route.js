@@ -53,6 +53,26 @@ app.get("/shoes",async(req,res)=>
 })
 
 
+app.get("/trending",async(req,res)=>
+{
+
+
+    let filter={category:"trending"}
+
+        try
+        {
+           const data=await Product.find(filter)
+           res.send(data)
+        }
+        catch(e)
+        {
+            res.send(e)
+        }
+    
+   
+})
+
+
 
 app.get("/tshirt",async(req,res)=>
 {
