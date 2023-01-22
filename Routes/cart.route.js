@@ -95,7 +95,7 @@ app.post("/addToCart",async(req,res)=>
 })
 
 
-app.delete("/delete",async(req,res)=>
+app.patch("/delete",async(req,res)=>
 {
     
     const {id,productId}=req.body
