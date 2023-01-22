@@ -9,7 +9,7 @@ app.get("/",async(req,res)=>
 {
     try
     {
-        const getData=await Order.find({id:req.body.id}).populate("products.product","id")
+        const getData=await Order.find({id:req.body.id}).populate("products.product").populate("id")
         res.send(getData)
     }
     catch(e)
