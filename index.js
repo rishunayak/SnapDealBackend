@@ -8,7 +8,7 @@ const product=require("./Routes/product.route")
 const cart=require("./Routes/cart.route")
 const order=require("./Routes/order.route")
 app.use(express.json())
-app.use(cors())
+app.use(cors({origin:"*"}))
 app.use("/products",product);
 app.use("/users",user);
 app.use("/carts",cart);
