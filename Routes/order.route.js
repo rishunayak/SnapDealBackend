@@ -28,11 +28,12 @@ app.post("/done",async(req,res)=>
     {
         const exist=await Order.findOne({id:id})
         if(exist)
-        {
-            exist.product=[...exist,...product];
+        {console.log(exist)
+            exist.products=[...exist.products,...product];
+            console.log(exist)
             try
             {
-                await Order.findByIdAndUpdate({_id:exist._id},exist)
+                await Order.findOneAndUpdate({_id:exist._id},exist)
                 res.send({msg:"Order Placed Successfully"});
             }
             catch(e)
@@ -45,7 +46,7 @@ app.post("/done",async(req,res)=>
         {
             try
             {
-                await Order.create({id,products:[...product]})
+                await Order.create({id,product:[...product]})
                 res.send({msg:"Order Placed Successfully"});
             }
             catch(e)

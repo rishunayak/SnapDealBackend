@@ -132,6 +132,11 @@ app.patch("/update",async(req,res)=>
 
 })
 
+app.delete("/removeCart",(req,res)=>
+{
+    
+})
+
 
 
 module.exports=app
