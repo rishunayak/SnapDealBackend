@@ -9,12 +9,12 @@ app.get("/",async(req,res)=>
 {
     try
     {
-        const getData=await Order.find({id:req.body.id}).populate("products.product")
+        const getData=await Order.find({id:req.body.id}).populate("products.product","id")
         res.send(getData)
     }
     catch(e)
     {
-        res.send(e)
+        res.send("error")
     }
    
 })
