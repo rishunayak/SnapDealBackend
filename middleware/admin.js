@@ -9,7 +9,7 @@ const admin=(req,res,next)=>
     {
         if(err)
         {
-            res.send("Login Frist")
+            res.send(`Login Frist ${err}`)
         }
         else
         {
